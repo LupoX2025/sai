@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en,tam">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lupo Nero — Electric, Reimagined</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --void: #0A0908;
+            --panel: #14120F;
+            --panel-light: #1D1A15;
+            --copper: #C9A961;
+            --charge: #EAD08C;
+            --white: #F3EEE4;
+            --muted: #8C8577;
+            --line: rgba(243, 238, 228, 0.09);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--void);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        .display {
+            font-family: 'Fraunces', serif;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ---- NAV ---- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 6vw;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+
+        .logo {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 1.4rem;
+            letter-spacing: 0.02em;
+            color: var(--white);
+        }
+
+        .logo::after {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--charge);
+            border-radius: 50%;
+            margin-left: 6px;
+            vertical-align: middle;
+            animation: blink 2.4s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.25;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        /* ---- HERO ---- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 6vw;
+        }
+
+        .hero-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--copper);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: riseIn 0.8s ease forwards 0.2s;
+        }
+
+        .wordmark {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: clamp(4.5rem, 13vw, 11rem);
+            line-height: 0.92;
+            letter-spacing: -0.01em;
+            background: linear-gradient(100deg, var(--charge) 0%, var(--white) 35%, var(--copper) 65%, var(--charge) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            animation: riseIn 1s ease forwards 0.4s;
+        }
+
+        .hero-tagline {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+            color: var(--white);
+            margin-top: 20px;
+            max-width: 20ch;
+            opacity: 0;
+            animation: riseIn 0.9s ease forwards 0.6s;
+        }
+
+        .hero-sub {
+            margin-top: 24px;
+            max-width: 42ch;
+            font-size: 1.05rem;
+            color: var(--muted);
+            line-height: 1.7;
+            opacity: 0;
+            animation: riseIn 0.9s ease forwards 0.75s;
+        }
+
+        @keyframes riseIn {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* signature: charge pulse line */
+        .pulse-track {
+            margin-top: 56px;
+            width: min(560px, 90vw);
+            height: 64px;
+            position: relative;
+            opacity: 0;
+            animation: riseIn 0.9s ease forwards 0.95s;
+        }
+
+        .pulse-track svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .pulse-path {
+            fill: none;
+            stroke: var(--charge);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 0 6px rgba(234, 208, 140, 0.5));
+            stroke-dasharray: 600;
+            stroke-dashoffset: 600;
+            animation: draw 2.6s ease-in-out infinite;
+        }
+
+        @keyframes draw {
+            0% {
+                stroke-dashoffset: 600;
+            }
+
+            45% {
+                stroke-dashoffset: 0;
+            }
+
+            100% {
+                stroke-dashoffset: -600;
+            }
+        }
+
+        .pulse-label {
+            position: absolute;
+            right: 0;
+            bottom: -22px;
+            font-size: 0.7rem;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 6vw;
+            font-size: 0.75rem;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.08em;
+        }
+
+        .scroll-hint .bar {
+            width: 1px;
+            height: 32px;
+            background: var(--line);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-hint .bar::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: var(--copper);
+            animation: fall 1.8s ease-in-out infinite;
+        }
+
+        @keyframes fall {
+            to {
+                top: 100%;
+            }
+        }
+
+        /* ---- SECTION SHARED ---- */
+        section {
+            padding: 140px 6vw;
+            position: relative;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 40px;
+            margin-bottom: 72px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 32px;
+        }
+
+        .section-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--copper);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .section-head h2 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 600;
+            max-width: 14ch;
+            margin-top: 12px;
+        }
+
+        .section-desc {
+            max-width: 32ch;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* ---- INTRO / WHAT WE DO ---- */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: var(--line);
+            border: 1px solid var(--line);
+        }
+
+        .intro-card {
+            background: var(--void);
+            padding: 44px 36px;
+            transition: background 0.3s ease;
+        }
+
+        .intro-card:hover {
+            background: var(--panel);
+        }
+
+        .intro-card .num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--charge);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .intro-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .intro-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        /* ---- BATTERY / SPECS ---- */
+        .specs {
+            background: var(--panel);
+        }
+
+        .specs-inner {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .cell-viz {
+            position: relative;
+            height: 420px;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            background: linear-gradient(180deg, var(--panel-light), var(--void));
+            display: flex;
+            align-items: flex-end;
+            padding: 24px;
+            overflow: hidden;
+        }
+
+        .cell-fill {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 72%;
+            background: linear-gradient(180deg, rgba(234, 208, 140, 0.28), rgba(234, 208, 140, 0.05));
+            animation: charge 4s ease-in-out infinite;
+        }
+
+        @keyframes charge {
+
+            0%,
+            100% {
+                height: 60%;
+            }
+
+            50% {
+                height: 82%;
+            }
+        }
+
+        .cell-label {
+            position: relative;
+            z-index: 2;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--white);
+        }
+
+        .cell-label .big {
+            display: block;
+            font-size: 2.6rem;
+            font-weight: 500;
+            color: var(--charge);
+            margin-bottom: 6px;
+        }
+
+        .spec-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 22px 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 1rem;
+        }
+
+        .spec-row .label {
+            color: var(--muted);
+        }
+
+        .spec-row .value {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--white);
+        }
+
+        /* ---- CTA ---- */
+        .cta {
+            text-align: center;
+            padding: 160px 6vw;
+        }
+
+        .cta h2 {
+            font-size: clamp(2.2rem, 6vw, 4.5rem);
+            font-weight: 700;
+            max-width: 18ch;
+            margin: 0 auto 40px;
+            line-height: 1.05;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 36px;
+            border: 1px solid var(--charge);
+            color: var(--charge);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border-radius: 2px;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .cta-btn:hover {
+            background: var(--charge);
+            color: var(--void);
+        }
+
+        footer {
+            padding: 40px 6vw;
+            border-top: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        @media (max-width: 800px) {
+            .intro-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .specs-inner {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .section-head {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--charge);
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">LN</div>
+        <div class="nav-links">
+            <a href="#intro">Vision</a>
+            <a href="#specs">Battery</a>
+            <a href="#cta">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-eyebrow">Electric vehicle manufacturing</div>
+        <h1 class="wordmark">Lupo Nero</h1>
+        <p class="hero-tagline">We don't build cars. We build what's next.</p>
+        <p class="hero-sub">An electric vehicle house engineered around one idea: the battery is the car. Every model we
+            ship starts with a cell chemistry breakthrough, not a body panel.</p>
+
+        <div class="pulse-track">
+            <svg viewBox="0 0 560 64" preserveAspectRatio="none">
+                <path class="pulse-path" d="M0,32 L160,32 L185,10 L210,54 L235,32 L560,32" />
+            </svg>
+            <div class="pulse-label mono">LIVE CELL TELEMETRY</div>
+        </div>
+
+        <div class="scroll-hint">
+            <div class="bar"></div>
+            SCROLL
+        </div>
+    </section>
+
+    <section id="intro">
+        <div class="section-head">
+            <div>
+                <div class="section-tag">What we're doing</div>
+                <h2>Innovation isn't a feature. It's the whole car.</h2>
+            </div>
+            <p class="section-desc">Three principles guide every Lupo Nero vehicle, from the first cell to the final
+                weld.</p>
+        </div>
+
+        <div class="intro-grid">
+            <div class="intro-card">
+                <span class="num mono">01</span>
+                <h3>Cell-first design</h3>
+                <p>Our battery architecture is designed before the chassis, not fitted into it. That's how we get more
+                    range out of a smaller, lighter pack.</p>
+            </div>
+            <div class="intro-card">
+                <span class="num mono">02</span>
+                <h3>Faster charge chemistry</h3>
+                <p>A proprietary electrode structure lets our cells accept charge faster without the heat buildup that
+                    shortens battery life elsewhere.</p>
+            </div>
+            <div class="intro-card">
+                <span class="num mono">03</span>
+                <h3>Built to outlast the car</h3>
+                <p>We engineer packs to retain real capacity for the vehicle's full lifetime, so range on day one is
+                    close to range ten years in.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="specs" class="specs">
+        <div class="section-head">
+            <div>
+                <div class="section-tag">The pack</div>
+                <h2>What's actually inside.</h2>
+            </div>
+            <p class="section-desc">The numbers behind the claim, not just the claim.</p>
+        </div>
+
+        <div class="specs-inner">
+            <div class="cell-viz">
+                <div class="cell-fill"></div>
+                <div class="cell-label">
+                    <span class="big">412 mi</span>
+                    Estimated range, single charge
+                </div>
+            </div>
+
+            <div class="spec-list">
+                <div class="spec-row"><span class="label">Cell chemistry</span><span class="value mono">Next-gen Li
+                        structure</span></div>
+                <div class="spec-row"><span class="label">Fast charge, 10 → 80%</span><span class="value mono">18
+                        min</span></div>
+                <div class="spec-row"><span class="label">Pack lifetime</span><span class="value mono">1M+ mi
+                        rated</span></div>
+                <div class="spec-row"><span class="label">Capacity retention @ 8yrs</span><span
+                        class="value mono">92%</span></div>
+                <div class="spec-row"><span class="label">Thermal runaway protection</span><span
+                        class="value mono">Cell-level isolation</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta" class="cta">
+        <h2>The car is just where the battery lives.</h2>
+        <a href="#" class="cta-btn">Reserve yours →</a>
+    </section>
+
+    <footer>
+        <span>© 2026 Lupo Nero</span>
+        <span class="mono">ENGINEERED AROUND THE CELL</span>
+    </footer>
+
+</body>
+
+</html>
